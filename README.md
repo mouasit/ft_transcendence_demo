@@ -25,6 +25,9 @@ CHAKRA UI and Typescript as a must-use programming language.
 
 ## Made By
 
+### [Mustapha Ouasit](https://github.com/mouasit)
+[![Mustapha Ouasit](.src/assets/madeby/mouassit.jpg)](https://github.com/mouasit)
+
 
 ## Demo
 
