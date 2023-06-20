@@ -23,6 +23,9 @@ CHAKRA UI and Typescript as a must-use programming language.
 ![Chat page mobile](./src/assets/design/Pong-MessagesMobile.png)
 ![Profile page](./src/assets/design/Pong-Profile.png)
 
+## Made By
+
+
 ## Demo
 
 To use the ft_transcendence, simply navigate to the URL where it is hosted: https://mouasit.github.io/ft_transcendence_demo
