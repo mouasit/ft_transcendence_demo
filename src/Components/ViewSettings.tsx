@@ -26,7 +26,6 @@ export default function ViewSettings({ setOpen }: TypeProps) {
           <span>Settings</span>
         </button>
         <button className="flex gap-2 p-2" onClick={async ()=>{
-          await logout();
           navigate("/Login")
         }}>
           <LogoutIcon edit="w-7 h-7 fill-primaryText" />
