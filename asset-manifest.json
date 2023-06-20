@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/ft_transcendence_demo/static/css/main.bfe65f61.css",
-    "main.js": "/ft_transcendence_demo/static/js/main.6cd057f6.js",
+    "main.js": "/ft_transcendence_demo/static/js/main.8b4a8f9b.js",
     "static/js/787.0d0bf929.chunk.js": "/ft_transcendence_demo/static/js/787.0d0bf929.chunk.js",
     "static/media/logo.svg": "/ft_transcendence_demo/static/media/logo.5ecbc5e144143bcf284b4cd1a9ff7c22.svg",
     "static/media/logo42.svg": "/ft_transcendence_demo/static/media/logo42.eae6f91f1c6e29285dd4df1a87a2681e.svg",
     "index.html": "/ft_transcendence_demo/index.html",
     "main.bfe65f61.css.map": "/ft_transcendence_demo/static/css/main.bfe65f61.css.map",
-    "main.6cd057f6.js.map": "/ft_transcendence_demo/static/js/main.6cd057f6.js.map",
+    "main.8b4a8f9b.js.map": "/ft_transcendence_demo/static/js/main.8b4a8f9b.js.map",
     "787.0d0bf929.chunk.js.map": "/ft_transcendence_demo/static/js/787.0d0bf929.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.bfe65f61.css",
-    "static/js/main.6cd057f6.js"
+    "static/js/main.8b4a8f9b.js"
   ]
 }
