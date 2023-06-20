@@ -25,17 +25,13 @@ CHAKRA UI and Typescript as a must-use programming language.
 
 ## Made By
 
-[![Mustapha Ouasit](./src/assets/madeby/mouassit.jpg)](https://github.com/mouasit)
-
-### [Mustapha Ouasit](https://github.com/mouasit)
-
-[![Hamid Naji El Idrissi](./src/assets/madeby/hnaji-el.jpg)](https://github.com/hnaji-el)
-
-### [Hamid Naji El Idrissi](https://github.com/hnaji-el)
-
-[![Ayoub Afdel](./src/assets/madeby/ayafdel.jpg)](https://github.com/Lowkey98)
-
-### [Ayoub Afdel](https://github.com/Lowkey98)
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/mouasit"><img src="./src/assets/madeby/mouassit.jpg" width="100px;" alt="Mustapha Ouasit"/><br /><sub><b>Mustapha Ouasit</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/hnaji-el"><img src="./src/assets/madeby/hnaji-el.jpg" width="100px;" alt="Hamid Naji El Idrissi"/><br /><sub><b>Hamid Naji El Idrissi</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Lowkey98"><img src="./src/assets/madeby/ayafdel.jpg" width="100px;" alt="Ayoub Afdel"/><br /><sub><b>Ayoub Afdel</b></sub></a><br /></td>
+  </tr>
+</table>
 
 ## Demo
 
