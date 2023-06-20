@@ -1,6 +1,6 @@
 # ft_transcendence
 
-![Design preview for the ft_transcendence](./src/assets/design/desktop-preview.jpg)
+![Design preview for the ft_transcendence](./src/assets/design/desktop-preview.png)
 
 ## Welcome! 👋
 
@@ -18,11 +18,11 @@ CHAKRA UI and Typescript as a must-use programming language.
 
 ## ScreenShots
 
-[Home page](./src/assets/design/Pong-Home)
-[Chat page](./src/assets/design/Pong-Messages)
-[Chat page mobile](./src/assets/design/Pong-MessagesMobile)
-[Chat box mobile](./src/assets/design/chatbox-mobile)
-[Profile page](./src/assets/design/Pong-Profile)
+[Home page](./src/assets/design/Pong-Home.png)
+[Chat page](./src/assets/design/Pong-Messages.png)
+[Chat page mobile](./src/assets/design/Pong-MessagesMobile.png)
+[Chat box mobile](./src/assets/design/chatbox-mobile.png)
+[Profile page](./src/assets/design/Pong-Profile.png)
 
 ## Demo
 
