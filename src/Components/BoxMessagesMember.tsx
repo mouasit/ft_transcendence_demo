@@ -21,7 +21,7 @@ export default function BoxMessagesMember({
         </p>
         {time ? (
           <div className="flex text-xs justify-end text-secondaryText">
-            time
+            {time}
           </div>
         ) : null}
       </div>

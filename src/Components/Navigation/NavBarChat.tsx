@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { Link,useNavigate } from "react-router-dom";
-import { logout} from "../../API";
+import { Link, useNavigate } from "react-router-dom";
+import { logout } from "../../API";
 import { CardChatChannel, CardChatFriend } from "../Cards";
 import { Dropdown, DropdownItem, DropdownBtn, DropdownList } from "../Dropdown";
 import { ControllerIcon, SettingsNavIcon, LogoutIcon } from "../Icons";
@@ -30,16 +30,17 @@ export default function NavBarChat({
       {messageData.typeDm === "chat" ? (
         <CardChatFriend data={messageData.dataChatBox} />
       ) : (
-        <CardChatChannel data={messageData.dataChatBox} setAddMember={setAddMember} setMembers={setMembers} />
+        <CardChatChannel
+          data={messageData.dataChatBox}
+          setAddMember={setAddMember}
+          setMembers={setMembers}
+        />
       )}
       <div className="hidden lg:flex items-center gap-5">
-        <Link
-          to="/Game"
-          className="bg-primary text-primaryText text-sm flex items-center justify-center gap-2.5 w-36 rounded-md p-3"
-        >
+        <button className="bg-primary text-primaryText text-sm flex items-center justify-center gap-2.5 w-36 rounded-md p-3">
           <ControllerIcon edit="w-7" />
           <span>Play now</span>
-        </Link>
+        </button>
         <Dropdown>
           <DropdownBtn
             type="text"
@@ -57,10 +58,13 @@ export default function NavBarChat({
               <SettingsNavIcon edit="w-5 h-5 fill-primaryText" />
               <span>Settings</span>
             </DropdownItem>
-            <DropdownItem edit="justify-center p-2" onClick={async ()=>{
-          await logout();
-          navigate("/Login")
-        }}>
+            <DropdownItem
+              edit="justify-center p-2"
+              onClick={async () => {
+                await logout();
+                navigate("/Login");
+              }}
+            >
               <LogoutIcon edit="w-5 h-5 fill-primaryText" />
               <span>Logout</span>
             </DropdownItem>

@@ -17,9 +17,6 @@ export default function MatchHistory({ id }: TypdProps) {
         setRender(true);
       }, id);
   }, []);
-
-  if (render) {
-    if (matchHistory.length)
       return (
         <div className="pt-5 pb-[7.6rem] lg:pb-[2.7rem] flex">
           <table className="table w-full ">
@@ -38,16 +35,4 @@ export default function MatchHistory({ id }: TypdProps) {
           </table>
         </div>
       );
-    else
-      return (
-        <div className="h-full flex pb-[7.3rem] lg:pb-6 justify-center items-center text-primaryText text-md">
-          No Matches.
-        </div>
-      );
-  }
-  return (
-    <div className="h-full flex pb-[7.3rem] lg:pb-6 justify-center items-center text-primaryText">
-      <Spinner edit="w-9 h-9" />
-    </div>
-  );
 }

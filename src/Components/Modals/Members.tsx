@@ -18,25 +18,11 @@ export default function Members() {
       setRender(true);
     }, messageData.dataChatBox.name);
   }, []);
-  if (render) {
-    if (members.length)
-      return (
-        <MembersContext.Provider value={{ setMembers: setMembers }}>
-          <div className="pt-5 w-full flex flex-col gap-6">
-            <MembersContainer data={members} />
-          </div>
-        </MembersContext.Provider>
-      );
-    return (
-      <div className="p-8 pb-[1rem] w-full flex gap-1 text-sm text-secondaryText justify-center item-center">
-        <ExclamationIcon edit="w-5 h-4 fill-secondaryText relative top-[.1rem]" />
-        You are the only one in this room.
+  return (
+    <MembersContext.Provider value={{ setMembers: setMembers }}>
+      <div className="pt-5 w-full flex flex-col gap-6">
+        <MembersContainer data={members} />
       </div>
-    );
-  } else
-    return (
-      <div className="p-8 pb-[1rem] w-full flex gap-1 text-sm text-secondaryText justify-center item-center">
-        <Spinner edit="w-9 h-9" />
-      </div>
-    );
+    </MembersContext.Provider>
+  );
 }

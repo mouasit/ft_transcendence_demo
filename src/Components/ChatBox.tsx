@@ -14,6 +14,7 @@ export default function ChatBox({ data }: TypeProps) {
   const messageData = useContext(MessagesContext);
   const stateMessage = useContext(StateMssages);
   
+  
   useEffect(() => {
     if (chatBox.current) {
       chatBox.current.scrollTop = chatBox.current.scrollHeight;
@@ -42,7 +43,7 @@ export default function ChatBox({ data }: TypeProps) {
             );
         } else {
           
-          if (e.login !== stateMessage.settings.nickname)
+          if (e.type === "member")
             return (
               <BoxMessagesMember
                 picture={e.picture}

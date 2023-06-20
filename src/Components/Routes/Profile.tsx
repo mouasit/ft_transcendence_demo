@@ -55,8 +55,6 @@ export default function Profile() {
     });
 
   }, []);
-
-  if (settings.nickname.length)
     return (
       <ActiveProfile.Provider
         value={{ value: true, settings: settings, updateSettings: setSettings }}
@@ -68,21 +66,21 @@ export default function Profile() {
             <div className="flex gap-10">
               <span className="flex flex-col items-center">
                 <span className="text-primaryText text-4xl font-extrabold max-w-[8rem] overflow-hidden text-ellipsis">
-                  {dataGame.friendsNumber}
+                  2
                 </span>
                 <span className="text-secondaryText text-sm">Friends</span>
               </span>
               <span className="w-[1px] bg-shape"></span>
               <span className="flex flex-col items-center">
                 <span className="text-primaryText text-4xl font-extrabold max-w-[8rem] overflow-hidden text-ellipsis">
-                  {dataGame.winsNumber}
+                  1
                 </span>
                 <span className="text-secondaryText text-sm ">Wins</span>
               </span>
               <span className="w-[1px] bg-shape"></span>
               <span className="flex flex-col items-center">
                 <span className="text-primaryText text-4xl font-extrabold max-w-[8rem] overflow-hidden text-ellipsis">
-                  {dataGame.losesNumber}
+                  1
                 </span>
                 <span className="text-secondaryText text-sm ">Losses</span>
               </span>
@@ -101,9 +99,4 @@ export default function Profile() {
       </ActiveProfile.Provider>
     );
 
-  return (
-    <div className="mx-3 flex justify-center items-center h-full">
-      <Spinner />
-    </div>
-  );
 }

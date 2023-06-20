@@ -801,7 +801,7 @@ export function RefreshIcon(props: typeProps) {
   );
 }
 
-export function AddFiriendSearchIcon(props: typeProps) {
+export function AddFriendSearchIcon(props: typeProps) {
   return (
     <svg
       id="Group_266"

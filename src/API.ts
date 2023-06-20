@@ -42,6 +42,12 @@ export function CheckTokenLogin(getRes: any) {
     });
 }
 
+interface TypeDataOnline {
+  id: string;
+  nickname: string;
+  pictureURL: string;
+}
+
 interface TypeDataProfileUser {
   friendsNumber: number;
   id: string;
@@ -49,7 +55,7 @@ interface TypeDataProfileUser {
   pictureURL: string;
 }
 
-interface TypeDataUesrs {
+interface TypeDataUsers {
   id: string;
   nickname: string;
   pictureURL: string;
@@ -75,57 +81,71 @@ interface TypedataFriend {
 }
 
 export function getDataUserLogged(getRes: (res: TypeDataLogged) => void) {
-  axios
-    .get(`${domain}/users/logged-user`, {
-      withCredentials: true,
-      headers: { "Access-Control-Allow-Origin": `${domain}` },
-    })
-    .then((res) => {
-      getRes(res.data);
-    })
-    .catch();
+  getRes({
+    id: "1",
+    nickname: "mouassit",
+    pictureURL:
+      "https://cdn.intra.42.fr/users/2cc53519ab737304bcdd74e4125c3e61/mouassit.jpg",
+    isTwoFactorAuthEnabled: false,
+    status: "online",
+  });
 }
 
-export function getDataUsers(getRes: (res: TypeDataUesrs[]) => void) {
-  axios
-    .get(`${domain}/users`, {
-      withCredentials: true,
-      headers: { "Access-Control-Allow-Origin": `${domain}` },
-    })
-    .then((res) => {
-      getRes(res.data);
-    })
-    .catch();
+export function getDataUsers(getRes: (res: TypeDataUsers[]) => void) {
+  getRes([
+    {
+      id: "2",
+      nickname: "hnaji-el",
+      pictureURL:
+        "https://cdn.intra.42.fr/users/fa83d9b95ae3ef290cac43d9c4c1010d/hnaji-el.jpg",
+      isFriendToLoggedUser: true,
+    },
+    {
+      id: "3",
+      nickname: "ayafdel",
+      pictureURL:
+        "https://cdn.intra.42.fr/users/cc4982ccc40e74b602bea75ae97172ff/ayafdel.jpg",
+      isFriendToLoggedUser: false,
+    },
+  ]);
 }
 
 export function getOneUser(
   getRes: (res: TypeDataProfileUser) => void,
   id: string
 ) {
-  axios
-    .get(`${domain}/users/${id}`, {
-      withCredentials: true,
-      headers: { "Access-Control-Allow-Origin": `${domain}` },
-    })
-    .then((res) => {
-      getRes(res.data);
-    })
-    .catch();
+  getRes({
+    friendsNumber: 2,
+    id: "2",
+    isBlockedByLoggedUser: false,
+    isFriendToLoggedUser: false,
+    nickname: "hnaji-el",
+    pictureURL:
+      "https://cdn.intra.42.fr/users/fa83d9b95ae3ef290cac43d9c4c1010d/hnaji-el.jpg",
+    status: "online",
+    winsNumber: 1,
+    losesNumber: 1,
+  })
 }
 
 export function getFriendsOneUser(
   getRes: (res: TypedataFriend[]) => void,
   id: string
 ) {
-  axios
-    .get(`${domain}/users/friends/${id}`, {
-      withCredentials: true,
-      headers: { "Access-Control-Allow-Origin": `${domain}` },
-    })
-    .then((res) => {
-      getRes(res.data);
-    })
-    .catch();
+  getRes([
+    {
+      id: "2",
+      nickname: "hnaji-el",
+      pictureURL:
+        "https://cdn.intra.42.fr/users/fa83d9b95ae3ef290cac43d9c4c1010d/hnaji-el.jpg",
+    },
+    {
+      id: "3",
+      nickname: "ayafdel",
+      pictureURL:
+        "https://cdn.intra.42.fr/users/cc4982ccc40e74b602bea75ae97172ff/ayafdel.jpg",
+    },
+  ]);
 }
 
 export async function addFriend(id: string) {
@@ -180,6 +200,23 @@ export function unBlockFriend(id: string) {
     .catch();
 }
 
+export function getFriendOnline(getRes: (res: TypeDataOnline[]) => void) {
+  getRes([
+    {
+      id: "2",
+      nickname: "hnaji-el",
+      pictureURL:
+        "https://cdn.intra.42.fr/users/fa83d9b95ae3ef290cac43d9c4c1010d/hnaji-el.jpg",
+    },
+    {
+      id: "3",
+      nickname: "ayafdel",
+      pictureURL:
+        "https://cdn.intra.42.fr/users/cc4982ccc40e74b602bea75ae97172ff/ayafdel.jpg",
+    },
+  ]);
+}
+
 //------------------------ chat --------------------------------
 
 export function getFriendChat() {
@@ -193,27 +230,134 @@ export function getFriendChat() {
 }
 
 export function getDmUsers(getRes: any) {
-  axios
-    .get(`${domain}/chat/DM-with-all-users`, {
-      withCredentials: true,
-      headers: { "Access-Control-Allow-Origin": `${domain}` },
-    })
-    .then((res) => {
-      getRes(res.data);
-    })
-    .catch();
+  getRes([
+    {
+      id: "2",
+      username: "hnaji-el",
+      picture:
+        "https://cdn.intra.42.fr/users/fa83d9b95ae3ef290cac43d9c4c1010d/hnaji-el.jpg",
+      conversation: [
+        {
+          message: "Hello my friend Mouassit",
+          type: "friend",
+          time: "10:00",
+        },
+
+        {
+          message: "How are you my friend Hnaji-el",
+          type: "user",
+          time: "10:15",
+        },
+
+        {
+          message: "Where are you from ?",
+          type: "friend",
+          time: "11:20",
+        },
+
+        {
+          message: "I'am from Morocco",
+          type: "user",
+          time: "12:00",
+        },
+      ],
+    },
+
+    {
+      id: "3",
+      username: "ayafdel",
+      picture:
+        "https://cdn.intra.42.fr/users/cc4982ccc40e74b602bea75ae97172ff/ayafdel.jpg",
+      conversation: [
+        {
+          message: "Hello my friend Mouassit",
+          type: "friend",
+          time: "10:00",
+        },
+
+        {
+          message: "How are you my friend Ayafdel",
+          type: "user",
+          time: "10:15",
+        },
+
+        {
+          message: "Where are you from ?",
+          type: "friend",
+          time: "11:20",
+        },
+
+        {
+          message: "I'am from Morocco",
+          type: "user",
+          time: "12:00",
+        },
+        {
+          message: "What about you ?",
+          type: "user",
+          time: "12:01",
+        },
+
+        {
+          message: "I'am from Morocco to",
+          type: "friend",
+          time: "12:05",
+        },
+      ],
+    },
+  ]);
 }
 
 export function getAllChannels(getRes: any) {
-  axios
-    .get(`${domain}/chat/room-message`, {
-      withCredentials: true,
-      headers: { "Access-Control-Allow-Origin": `${domain}` },
-    })
-    .then((res: any) => {
-      getRes(res.data);
-    })
-    .catch();
+  getRes([
+    {
+      id: 1,
+      name: "channel 01",
+      picture:
+        "https://static.vecteezy.com/system/resources/previews/006/988/723/original/boy-playing-game-gamer-logo-free-vector.jpg",
+      members: "10",
+      latestMessage: "welcome to your channel",
+      role: "owner",
+      conversation: [
+        {
+          type: "member",
+          message: "hey 😃",
+          time: "10:00",
+          picture:
+            "https://cdn.intra.42.fr/users/fa83d9b95ae3ef290cac43d9c4c1010d/hnaji-el.jpg",
+        },
+        {
+          type: "user",
+          message: "welcome to your channel",
+          time: "10:45",
+        },
+      ],
+    },
+
+    {
+      id: 2,
+      name: "channel 02",
+      picture:
+        "https://cdna.artstation.com/p/assets/images/images/023/459/708/large/vaibhav-verma-game-logo.jpg?1579270067",
+      members: "10",
+      latestMessage: "welcome to your channel",
+      role: "admin",
+      conversation: [
+        {
+          type: "member",
+          message: "New channel",
+          time: "17:00",
+          picture:
+            "https://cdn.intra.42.fr/users/cc4982ccc40e74b602bea75ae97172ff/ayafdel.jpg",
+        },
+        {
+          type: "user",
+          message: "It's a good channel",
+          time: "17:15",
+        },
+      ],
+    },
+  ]);
 }
 
 export function getChannelsDm() {
@@ -228,11 +372,7 @@ export function getChannelsDm() {
 
 export async function CreateChannel(getRes: any, data: any) {
   await axios
-    .post(
-      `${domain}/chat/create-room`,
-      { data },
-      { withCredentials: true }
-    )
+    .post(`${domain}/chat/create-room`, { data }, { withCredentials: true })
     .then((res) => {
       getRes(res);
     })
@@ -242,91 +382,82 @@ export async function CreateChannel(getRes: any, data: any) {
 }
 
 export function getFriendChannel(getRes: any, nameChannel: string) {
-  axios
-    .get(`${domain}/chat/friends-in-room/${nameChannel}`, {
-      withCredentials: true,
-      headers: { "Access-Control-Allow-Origin": `${domain}` },
-    })
-    .then((res) => {
-      getRes(res.data);
-    })
-    .catch();
+  getRes([
+    {
+      id: "2",
+      nickname: "hnaji-el",
+      pictureURL:
+        "https://cdn.intra.42.fr/users/fa83d9b95ae3ef290cac43d9c4c1010d/hnaji-el.jpg",
+      isFriendToLoggedUser: true,
+    },
+    {
+      id: "3",
+      nickname: "ayafdel",
+      pictureURL:
+        "https://cdn.intra.42.fr/users/cc4982ccc40e74b602bea75ae97172ff/ayafdel.jpg",
+      isFriendToLoggedUser: false,
+    },
+  ]);
 }
 
 export function getMembersChannel(getRes: any, nameChannel: string) {
-  axios
-    .get(`${domain}/chat/users-in-room/${nameChannel}`, {
-      withCredentials: true,
-      headers: { "Access-Control-Allow-Origin": `${domain}` },
-    })
-    .then((res) => {
-      getRes(res.data);
-    })
-    .catch();
+  getRes([
+    {
+      role: "admin",
+      id: "2",
+      username: "hnaji-el",
+      pictureLink:
+        "https://cdn.intra.42.fr/users/fa83d9b95ae3ef290cac43d9c4c1010d/hnaji-el.jpg",
+      isFriendToLoggedUser: true,
+    },
+    {
+      id: "3",
+      username: "ayafdel",
+      pictureLink:
+        "https://cdn.intra.42.fr/users/cc4982ccc40e74b602bea75ae97172ff/ayafdel.jpg",
+      isFriendToLoggedUser: false,
+    },
+  ]);
 }
 
 export async function addToRoom(data: any) {
   await axios
-    .post(
-      `${domain}/chat/add-to-room`,
-      { data },
-      { withCredentials: true }
-    )
+    .post(`${domain}/chat/add-to-room`, { data }, { withCredentials: true })
     .then()
     .catch();
 }
 
 export async function setAdmin(data: any) {
   await axios
-    .post(
-      `${domain}/chat/set-admin`,
-      { data },
-      { withCredentials: true }
-    )
+    .post(`${domain}/chat/set-admin`, { data }, { withCredentials: true })
     .then()
     .catch();
 }
 
 export async function setBlock(data: any) {
   await axios
-    .patch(
-      `${domain}/chat/ban`,
-      { data },
-      { withCredentials: true }
-    )
+    .patch(`${domain}/chat/ban`, { data }, { withCredentials: true })
     .then()
     .catch();
 }
 
 export async function setKick(data: any) {
   await axios
-    .patch(
-      `${domain}/chat/kick`,
-      { data },
-      { withCredentials: true }
-    )
+    .patch(`${domain}/chat/kick`, { data }, { withCredentials: true })
     .then()
     .catch();
 }
 
 export async function setMute(data: any) {
   await axios
-    .patch(
-      `${domain}/chat/muted`,
-      { data },
-      { withCredentials: true }
-    )
+    .patch(`${domain}/chat/muted`, { data }, { withCredentials: true })
     .then()
     .catch();
 }
 
 export async function leaveRoom(name: string) {
   await axios
-    .post(
-      `${domain}/chat/quite-room`,
-      { name },
-      { withCredentials: true }
-    )
+    .post(`${domain}/chat/quite-room`, { name }, { withCredentials: true })
     .then()
     .catch();
 }
@@ -341,14 +472,8 @@ export async function deleteRoom(name: string) {
 }
 
 export function joinRoom(getRes: any, data: any) {
-  console.log("data: ", data);
-
   axios
-    .post(
-      `${domain}/chat/join-room`,
-      { data },
-      { withCredentials: true }
-    )
+    .post(`${domain}/chat/join-room`, { data }, { withCredentials: true })
     .then((res) => {
       getRes(res.data);
     })
@@ -453,19 +578,28 @@ export function getAchievements(getRes: any, id: string) {
 }
 
 export function getMatchHistory(getRes: any, id: string) {
-  axios
-    .get(`${domain}/users/game/match-history/${id}`, {
-      withCredentials: true,
-      headers: { "Access-Control-Allow-Origin": `${domain}` },
-    })
-    .then((res) => {
-      getRes(res.data);
-    })
-    .catch();
+  getRes([
+    {
+      id: "2",
+      nickname: "hnaji-el",
+      pictureURL:
+        "https://cdn.intra.42.fr/users/fa83d9b95ae3ef290cac43d9c4c1010d/hnaji-el.jpg",
+      score: "2 - 5",
+      gameState: "WIN",
+    },
+    {
+      id: "3",
+      nickname: "ayafdel",
+      pictureURL:
+        "https://cdn.intra.42.fr/users/cc4982ccc40e74b602bea75ae97172ff/ayafdel.jpg",
+      score: " 5 - 4",
+      gameState: "LOSE",
+    },
+  ]);
 }
 
 export async function logout() {
- await axios
+  await axios
     .get(`${domain}/auth/logout`, {
       withCredentials: true,
       headers: { "Access-Control-Allow-Origin": `${domain}` },

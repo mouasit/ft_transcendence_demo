@@ -3,7 +3,7 @@ import friendPicture from "../assets/friend.jpg";
 import pictureUser from "../assets/user.jpg";
 import { Link } from "react-router-dom";
 import {
-  AddFiriendSearchIcon,
+  AddFriendSearchIcon,
   ArrowLeftIcon,
   GroupIcon,
   LockIcon,
@@ -38,6 +38,10 @@ import {
   setMute,
 } from "../API";
 import { globalSocket } from "../socket";
+
+interface TypeIcon {
+  icon: any;
+}
 
 interface TypeCardProfile {
   setOpen?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -103,7 +107,7 @@ interface TypeFriendChannel {
   data: any;
 }
 
-export function CardFriendOnline() {
+export function CardFriendOnline(data: TypeFriendChannel) {
   return (
     <Link
       to="/Messages"
@@ -111,13 +115,13 @@ export function CardFriendOnline() {
     >
       <div className="flex items-center gap-2">
         <img
-          src={friendPicture}
+          src={data.data.pictureURL}
           alt="Friend"
           className="w-10 h-10 rounded-full"
         />
         <div className="flex flex-col gap-1">
-          <span className="text-primaryText text-sm w-36 overflow-hidden text-ellipsis whitespace-nowrap">
-            Username
+          <span className="text-primaryText text-sm w-36 overflow-hidden text-ellipsis whitespace-nowrap capitalize">
+            {data.data.nickname}
           </span>
           <span className="text-secondaryText font-light text-xs">Online</span>
         </div>
@@ -207,14 +211,14 @@ export function CardProfileUser({ data }: TypeDataProfileUser) {
   );
 }
 
-export function CardAchievments() {
+export function CardAchievments(type: any) {
   return (
     <div className="flex items-center justify-center p-5 w-[26rem] shadow gap-5 bg-body rounded-xl">
-      <CircleAchievements />
+      <CircleAchievements type={type} />
       <div className="flex flex-col gap-1">
-        <span className="text-primaryText text-4xl">4</span>
+        <span className="text-primaryText text-4xl">10</span>
         <span className="text-secondaryText text-sm">
-          Achievement four wins
+          Achievement completed
         </span>
       </div>
     </div>
@@ -321,26 +325,10 @@ export function CardConversation({ data, index }: TypeConversation) {
             <PointsIcon edit="w-2.5 h-2.5 fill-secondaryText" />
           </MenuButton>
           <MenuList className="bg-body rounded-md shadow right-0 w-36 flex flex-col py-5 gap-2 list-dropdown cursor-default text-primaryText text-sm">
-            <MenuItem
-              className="flex gap-2 hover:bg-backgroundHover items-center py-2 px-3"
-              onClick={() => {
-                globalSocket.emit("inviteToPlay", {
-                  sender: dataUser.settings,
-                  receiverId: data.id,
-                });
-              }}
-            >
+            <MenuItem className="flex gap-2 hover:bg-backgroundHover items-center py-2 px-3">
               Invite to play
             </MenuItem>
-            <MenuItem
-              className="flex gap-2 hover:bg-backgroundHover items-center py-2 px-3 capitalize"
-              onClick={async () => {
-                await blockFriend(data.id);
-                getDmUsers((res: any) => {
-                  messageData.setDataDm(res);
-                });
-              }}
-            >
+            <MenuItem className="flex gap-2 hover:bg-backgroundHover items-center py-2 px-3 capitalize">
               block
             </MenuItem>
           </MenuList>
@@ -398,6 +386,11 @@ export function CardChannelConversation({
         }}
       >
         <div className="flex items-center gap-2">
+          <img
+            src={data.picture}
+            alt="channel picture"
+            className="h-10 w-10 rounded-full"
+          />
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-1.5">
               <span className="max-w-[9.6rem] overflow-hidden text-ellipsis whitespace-nowrap text-sm text-primaryText capitalize">
@@ -458,6 +451,7 @@ export function CardChannelConversation({
 export function CardChatFriend({ data }: TypeChat) {
   const stateMessages = useContext(StateMssages);
   const messageData = useContext(MessagesContext);
+
   return (
     <div className="flex flex-1 items-center gap-4">
       {messageData.dataChatBox ? (
@@ -470,7 +464,11 @@ export function CardChatFriend({ data }: TypeChat) {
           >
             <ArrowLeftIcon edit="w-2.5 h-2.5 fill-secondaryText" />
           </button>
-          <Link to="/ProfileUser" state={{id:data?.id}} className="flex items-center gap-2">
+          <Link
+            to="/ProfileUser"
+            state={{ id: data?.id }}
+            className="flex items-center gap-2"
+          >
             <img
               src={data?.picture}
               alt="Friend"
@@ -518,6 +516,11 @@ export function CardChatChannel({
       </button>
       <div className="flex items-center w-full gap-2">
         <div className="flex lg:gap-4 w-full justify-between items-center lg:justify-start">
+          <img
+            src={data?.picture}
+            alt="picture"
+            className="h-14 w-14 rounded-full"
+          />
           <span className="text-[1.1rem] text-primaryText max-w-sm overflow-hidden text-ellipsis whitespace-nowrap capitalize">
             {data?.name}
           </span>
@@ -843,6 +846,22 @@ export function CardSearchUser({
             {data.nickname}
           </span>
         </Link>
+        {stateFriend ? (
+          <Menu>
+            <MenuButton className="p-1 h-7 w-7 bg-shape hover:bg-backgroundHover rounded-full">
+              <PointsIcon edit="w-[.7rem] h-[.7rem] fill-secondaryText mx-auto" />
+            </MenuButton>
+            <MenuList className="bg-body rounded-md shadow right-0 w-36 flex flex-col py-2 gap-2 list-dropdown cursor-default text-primaryText text-sm">
+              <MenuItem className="flex gap-2 hover:bg-backgroundHover font-light justify-center items-center py-2 px-3">
+                Invite to play
+              </MenuItem>
+            </MenuList>
+          </Menu>
+        ) : (
+          <button className="w-7 h-7 rounded-full  flex justify-center items-center bg-shape hover:bg-backgroundHover">
+            <AddFriendSearchIcon edit="w-4 h-4 fill-secondaryText" />
+          </button>
+        )}
       </div>
     </div>
   );

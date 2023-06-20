@@ -90,14 +90,6 @@ export default function ProfileUser() {
     }, id);
   }, [id]);
 
-  if (id === undefined) navigate(-1);
-
-  if (
-    id !== undefined &&
-    dataUser.nickname.length &&
-    typeUser.length &&
-    settings.nickname.length
-  )
     return (
       <ActiveProfileUser.Provider
         value={{
@@ -165,10 +157,4 @@ export default function ProfileUser() {
         </UpdateDataProfileUser.Provider>
       </ActiveProfileUser.Provider>
     );
-
-  return (
-    <div className="mx-3 flex justify-center items-center h-full">
-      <Spinner />
-    </div>
-  );
 }

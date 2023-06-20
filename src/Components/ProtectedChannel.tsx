@@ -61,17 +61,8 @@ export default function ProtectedChannel({ setCreateChannel }: TypeProps) {
 
             if (error) return;
 
-            checkChannelName((res: any) => {
-              if (res === "error") {
-                setErrorMessage("Name already exists");
-              } else {
-                getAllChannels((res: any) => {
-                  messageData.setChannelDm(res);
-                  setCreateChannel(false);
-                  document.body.style.overflow = "auto";
-                });
-              }
-            }, data);
+            setCreateChannel(false);
+            document.body.style.overflow = "auto";
           }}
         >
           Create

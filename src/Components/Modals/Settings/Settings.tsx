@@ -143,21 +143,8 @@ export default function Settings({
               setErrorMessage(errorMessage);
               return;
             }
-
-            if (tmpPicture.length) await editPicture(sendPicture);
-            await editNickname((res: any) => {
-              if (res === "invalid") setErrorMessage("Username already exists");
-              else {
-                if (enable) turOnTfa();
-                else turnOffTfa();
-
-                getDataUserLogged((res: TypeData) => {
-                  dataUserLogged.updateSettings(res);
-                  setOpen(false);
-                  document.body.style.overflow = "auto";
-                });
-              }
-            }, value);
+            setOpen(false);
+            document.body.style.overflow = "auto";
           }}
         >
           Save

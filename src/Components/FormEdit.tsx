@@ -99,12 +99,7 @@ export default function FormEdit({ data }: TypeProps) {
                   setErrorMessage(errorMessage);
                   return;
                 }
-                if (tmpPicture.length) await editPicture(sendPicture);
-                await editNickname((res: any) => {
-                  if (res === "invalid")
-                    setErrorMessage("Username already exists");
-                  else navigate("/Home");
-                }, value);
+                navigate("/Home");
               }}
             >
               Next

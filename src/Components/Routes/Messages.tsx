@@ -10,7 +10,7 @@ import {
 } from "../../API";
 import Spinner from "../Spinner";
 import { io } from "socket.io-client";
-const domain:any = process.env.REACT_APP_DOMAIN1;
+const domain: any = process.env.REACT_APP_DOMAIN1;
 
 interface TypeData {
   id: string;
@@ -46,7 +46,6 @@ const socket = io(domain, {
   withCredentials: true,
 });
 export default function Messages() {
-  CheckToken();
   const [click, setClick] = useState(false);
   const [firstClick, setFirstClick] = useState(true);
 
@@ -64,7 +63,7 @@ export default function Messages() {
     pictureURL: "",
     nickname: "",
     isTwoFactorAuthEnabled: false,
-    status:""
+    status: "",
   });
 
   const dataChat = {
@@ -99,6 +98,8 @@ export default function Messages() {
     });
     getDmUsers((res: any) => {
       setDataDm(res);
+      console.log("res: ",res[indexDm]);
+      
       setDataChatBox(res[indexDm]);
     });
   }, []);
@@ -121,81 +122,74 @@ export default function Messages() {
       setSettings(res);
     });
   }, []);
-
-  if (settings.nickname.length)
-    return (
-      <StateMssages.Provider
+  return (
+    <StateMssages.Provider
+      value={{
+        active: true,
+        click: click,
+        firstClick: firstClick,
+        setFirstClick: setFirstClick,
+        setClick: setClick,
+        settings: settings,
+        updateSettings: setSettings,
+      }}
+    >
+      <MessagesContext.Provider
         value={{
-          active: true,
-          click: click,
-          firstClick: firstClick,
-          setFirstClick: setFirstClick,
-          setClick: setClick,
-          settings: settings,
-          updateSettings: setSettings,
+          dataDm: dataDm,
+          setDataDm: setDataDm,
+          channelDm: channelDm,
+          setChannelDm: setChannelDm,
+          dataChatBox: dataChatBox,
+          setDataChatBox: setDataChatBox,
+          sesetDataDm: setDataDm,
+          indexDm: indexDm,
+          setIndexDm: setIndexDm,
+          indexChannel: indexChannel,
+          setIndexChannel: setIndexChannel,
+          typeDm: typeDm,
+          setTypeDm: setTypeDm,
+          passwordProtected: passwordProtected,
+          setpasswordProtected: setpasswordProtected,
         }}
       >
-        <MessagesContext.Provider
-          value={{
-            dataDm: dataDm,
-            setDataDm: setDataDm,
-            channelDm: channelDm,
-            setChannelDm: setChannelDm,
-            dataChatBox: dataChatBox,
-            setDataChatBox: setDataChatBox,
-            sesetDataDm: setDataDm,
-            indexDm: indexDm,
-            setIndexDm: setIndexDm,
-            indexChannel: indexChannel,
-            setIndexChannel: setIndexChannel,
-            typeDm: typeDm,
-            setTypeDm: setTypeDm,
-            passwordProtected: passwordProtected,
-            setpasswordProtected: setpasswordProtected,
-          }}
-        >
-          <NavigationChat />
-          {dataChatBox ? (
-            <>
-              <main
-                className={`${
-                  click ? "" : "absolute w-0 h-0"
-                } lg:block lg:relative lg:w-auto lg:h-auto mx-3 lg:pb-1 pt-7 lg:ml-64 lg:mr-4 overflow-hidden mb-[4.85rem]`}
-              >
-                <ChatBox data={dataChatBox?.conversation} />
-              </main>
-              <div className="absolute w-full bottom-[0.9rem] px-3 lg:pl-64 lg:pr-4">
-                <form className="flex items-center rounded-md bg-shape pr-2">
-                  <input
-                    type="text"
-                    placeholder="Type a message"
-                    value={message}
-                    className="placeholder-secondary-text flex-1 bg-transparent p-4 pl-3 pr-2 text-sm font-light text-primaryText placeholder:text-sm placeholder:font-light focus:outline-none"
-                    onChange={(e) => {
-                      setMessage(e.currentTarget.value);
-                    }}
-                  />
-                  <button
-                    type="submit"
-                    className="flex h-8 w-8 items-center justify-center rounded-md bg-primary"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setMessage("");
-                      sendMessage();
-                    }}
-                  >
-                    <SendIcon edit="w-4 fill-white" />
-                  </button>
-                </form>
-              </div>
-            </>
-          ) : null}
-        </MessagesContext.Provider>
-      </StateMssages.Provider>
-    );
-  return (
-    <div className="mx-3 flex justify-center items-center h-full">
-      <Spinner />
-    </div>
+        <NavigationChat />
+        {dataChatBox ? (
+          <>
+            <main
+              className={`${
+                click ? "" : "absolute w-0 h-0"
+              } lg:block lg:relative lg:w-auto lg:h-auto mx-3 lg:pb-1 pt-7 lg:ml-64 lg:mr-4 overflow-hidden mb-[4.85rem]`}
+            >
+              <ChatBox data={dataChatBox?.conversation} />
+            </main>
+            <div className="absolute w-full bottom-[0.9rem] px-3 lg:pl-64 lg:pr-4">
+              <form className="flex items-center rounded-md bg-shape pr-2">
+                <input
+                  type="text"
+                  placeholder="Type a message"
+                  value={message}
+                  className="placeholder-secondary-text flex-1 bg-transparent p-4 pl-3 pr-2 text-sm font-light text-primaryText placeholder:text-sm placeholder:font-light focus:outline-none"
+                  onChange={(e) => {
+                    setMessage(e.currentTarget.value);
+                  }}
+                />
+                <button
+                  type="submit"
+                  className="flex h-8 w-8 items-center justify-center rounded-md bg-primary"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setMessage("");
+                    sendMessage();
+                  }}
+                >
+                  <SendIcon edit="w-4 fill-white" />
+                </button>
+              </form>
+            </div>
+          </>
+        ) : null}
+      </MessagesContext.Provider>
+    </StateMssages.Provider>
   );
 }

@@ -43,17 +43,8 @@ export default function PublicChannel({ setCreateChannel }: TypeProps) {
               setErrorMessage("Zone text empty");
               return;
             }
-            checkChannelName((res: any) => {
-              if (res === "error") {
-                setErrorMessage("Name already exists");
-              } else {
-                getAllChannels((res: any) => {
-                  messageData.setChannelDm(res);
-                  setCreateChannel(false);
-                  document.body.style.overflow = "auto";
-                });
-              }
-            }, data);
+            setCreateChannel(false);
+            document.body.style.overflow = "auto";
           }}
         >
           Create
