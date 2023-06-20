@@ -61,7 +61,6 @@ export default function NavBarChat({
             <DropdownItem
               edit="justify-center p-2"
               onClick={async () => {
-                await logout();
                 navigate("/Login");
               }}
             >

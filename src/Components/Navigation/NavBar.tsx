@@ -57,7 +57,6 @@ export default function NavBar({ setOpen }: TypeProps) {
             <DropdownItem
               edit="justify-center p-2"
               onClick={async () => {
-                await logout();
                 navigate("/Login");
               }}
             >
