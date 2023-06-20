@@ -21,7 +21,6 @@ CHAKRA UI and Typescript as a must-use programming language.
 ![Home page](./src/assets/design/Pong-Home.png)
 ![Chat page](./src/assets/design/Pong-Messages.png)
 ![Chat page mobile](./src/assets/design/Pong-MessagesMobile.png)
-![Chat box mobile](./src/assets/design/chatbox-mobile.png)
 ![Profile page](./src/assets/design/Pong-Profile.png)
 
 ## Demo
