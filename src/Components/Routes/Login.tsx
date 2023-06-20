@@ -10,18 +10,11 @@ import {
   PointsTop,
   Pong,
 } from "../PongElements";
-import Redirection from "./Redirection";
 
-const domain = process.env.REACT_APP_DOMAIN;
 export default function Login() {
-  const [checkLogin, setCheckLogin] = useState<string>("");
-  CheckTokenLogin((res: any) => {
-    setCheckLogin(res);
-  });
   useEffect(() => {
     document.title = "Pong - Login";
   }, []);
-  if (checkLogin.length)
     return (
       <div className="flex flex-col gap-10 h-full">
         <header className="p-10 flex justify-center lg:justify-start">
@@ -61,6 +54,4 @@ export default function Login() {
         </main>
       </div>
     );
-
-  return <Redirection />;
 }
